@@ -31,9 +31,14 @@ export interface ShowcaseProject {
 
 export interface HomePagePayload {
   footer?: PortableTextBlock[]
+  video?: string
+  videoMobile?: string
+  videoPosterMobileUrl?: string
+  videoPosterDesktopUrl?: string
   overview?: PortableTextBlock[]
   showcaseProjects?: ShowcaseProject[]
   title?: string
+  contentBlocks?: []
 }
 
 export interface PagePayload {

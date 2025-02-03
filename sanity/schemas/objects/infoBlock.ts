@@ -1,36 +1,43 @@
-import { CogIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'settings',
-  title: 'Settings',
-  type: 'document',
-  icon: CogIcon,
-  // Uncomment below to have edits publish automatically as you type
-  // liveEdit: true,
+  name: 'infoBlock',
+  title: 'Info Block',
+  type: 'object',
   fields: [
     defineField({
-      name: 'menuItems',
-      title: 'Menu Item list',
-      description: 'Links displayed on the header of your site.',
-      type: 'array',
-      of: [
-        {
-          title: 'Reference',
-          type: 'reference',
-          to: [
-            {
-              type: 'home',
-            },
-            {
-              type: 'page',
-            },
-            {
-              type: 'project',
-            },
-          ],
-        },
-      ],
+      name: 'padding',
+      title: 'Padding',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Small', value: 'small' },
+          { title: 'Medium', value: 'medium' },
+          { title: 'Large', value: 'large' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'paddingTop',
+      title: 'Padding top',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Small', value: 'small' },
+          { title: 'Medium', value: 'medium' },
+          { title: 'Large', value: 'large' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'backgroundWhite',
+      title: 'White Background',
+      type: 'boolean',
+    }),
+    defineField({
+      name: 'headline',
+      title: 'Headline',
+      type: 'string',
     }),
     defineField({
       name: 'text',
@@ -83,81 +90,43 @@ export default defineType({
     defineField({
       name: 'image',
       title: 'Image',
-      description: 'An image for prices page',
       type: 'image',
       options: {
         hotspot: true,
       },
     }),
     defineField({
-      name: 'pricesList',
-      title: 'Prices',
+      name: 'list',
+      title: 'List',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            {
+            defineField({
               name: 'text1',
-              title: 'Month',
-              type: 'string',
-            },
-            {
+              title: 'Text 1',
+              type: 'text',
+            }),
+            defineField({
               name: 'text2',
-              title: 'Price',
-              type: 'string',
-            },
-            {
-              name: 'text3',
-              title: 'Period',
-              type: 'string',
-            },
+              title: 'Text 2',
+              type: 'text',
+            }),
           ],
         },
       ],
     }),
-    defineField({
-      name: 'footer',
-      description:
-        'This is a block of text that will be displayed at the bottom of the page.',
-      title: 'Footer Info',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          marks: {
-            annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: 'Link',
-                fields: [
-                  {
-                    name: 'href',
-                    type: 'url',
-                    title: 'Url',
-                  },
-                ],
-              },
-            ],
-          },
-        }),
-      ],
-    }),
-    defineField({
-      name: 'ogImage',
-      title: 'Open Graph Image',
-      type: 'image',
-      description: 'Displayed on social cards and search engine results.',
-      options: {
-        hotspot: true,
-      },
-    }),
   ],
   preview: {
-    prepare() {
+    select: {
+      headline: 'headline',
+      image: 'image',
+    },
+    prepare({ headline, image }) {
       return {
-        title: 'Menu Items',
+        title: headline || 'No headline',
+        media: image,
       }
     },
   },

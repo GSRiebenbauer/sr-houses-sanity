@@ -8,6 +8,7 @@ import { defineConfig } from 'sanity'
 import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import { media } from 'sanity-plugin-media'
 
 import { apiVersion, dataset, projectId, studioUrl } from '@/sanity/lib/api'
 import * as resolve from '@/sanity/plugins/resolve'
@@ -19,10 +20,16 @@ import milestone from '@/sanity/schemas/objects/milestone'
 import timeline from '@/sanity/schemas/objects/timeline'
 import home from '@/sanity/schemas/singletons/home'
 import settings from '@/sanity/schemas/singletons/settings'
+import textBlock from '@/sanity/schemas/objects/textBlock'
+import imageBlock from '@/sanity/schemas/objects/imageBlock'
+import mediaBlock from '@/sanity/schemas/objects/mediaBlock'
+import contentWithOverlay from '@/sanity/schemas/objects/contentWithOverlay'
+import contentWithOverlay2 from '@/sanity/schemas/objects/contentWithOverlay2'
+import imageTextBlock from '@/sanity/schemas/objects/imageTextBlock'
+import infoBlock from '@/sanity/schemas/objects/infoBlock'
+import CTABlock from '@/sanity/schemas/objects/CTABlock'
 
-const title =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE ||
-  'Next.js Personal Website with Sanity.io'
+const title = process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'SR Houses'
 
 export default defineConfig({
   basePath: studioUrl,
@@ -42,12 +49,21 @@ export default defineConfig({
       // Objects
       milestone,
       timeline,
+      textBlock,
+      imageBlock,
+      mediaBlock,
+      contentWithOverlay,
+      contentWithOverlay2,
+      imageTextBlock,
+      infoBlock,
+      CTABlock,
     ],
   },
   plugins: [
     structureTool({
       structure: pageStructure([home, settings]),
     }),
+    media(),
     presentationTool({
       resolve,
       previewUrl: {

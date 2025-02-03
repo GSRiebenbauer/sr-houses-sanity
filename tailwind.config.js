@@ -1,4 +1,4 @@
-const { theme } = require('@sanity/demo/tailwind')
+const { theme } = require('@sanity/demo/tailwind');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,6 +9,14 @@ module.exports = {
   ],
   theme: {
     ...theme,
+    extend: {
+      fontSize: {
+        '6xl': '2.75rem',
+      },
+      lineHeight: {
+        tight: '1.2',
+      },
+    },
     // Overriding fontFamily to use @next/font loaded families
     fontFamily: {
       mono: 'var(--font-mono)',
@@ -17,4 +25,4 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/typography')],
-}
+};
