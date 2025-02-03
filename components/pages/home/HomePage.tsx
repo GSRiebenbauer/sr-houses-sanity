@@ -29,9 +29,8 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
 
   return (
     <div className="overflow-hidden">
-      <ComingSoon content={data} />
-      {/* <HeroSection content={heroSection} />
-      <HomePageContent content={data?.contentBlocks} /> */}
+      <HeroSection content={heroSection} />
+      <HomePageContent content={data?.contentBlocks} /> 
     </div>
   )
 }
